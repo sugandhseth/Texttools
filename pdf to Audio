@@ -1,0 +1,52 @@
+#This code converts the pdf to audio
+import PyPDF2
+
+# Open the PDF file in binary mode
+with open('example.pdf', 'rb') as file:
+    
+    # Create a PDF reader object
+    reader = PyPDF2.PdfReader(file)
+    
+    # Get the number of pages in the PDF file
+    num_pages = len(reader.pages)
+    print(num_pages)
+    ct="" # take a variable that can store the entire pdf text
+    # extract all the text of the pdf 
+    for i in range(num_pages):
+        
+        # Get the text content of the current page
+        page = reader.pages[i]
+        text = page.extract_text()
+        ct=ct+(text)
+        # Print the text content of the current page
+        print(text)
+    print("complete text is ",ct)
+    # now lets convert a particular page of the pdf to audio 
+    # input the page number from the user  
+    n=int(input("enter the page no to extract"))
+    # extract the page
+    page = reader.pages[n]
+    # extract the text from that page
+    text = page.extract_text(
+    print(text)
+    # convert the extracted text into audio using GTTS 
+    from gtts import gTTS
+    
+    # This module is imported so that we can
+    # play the converted audio
+    import os
+    
+    # The text that you want to convert to audio
+    
+    
+    # Language in which you want to convert in this its english language 
+    language = 'en'
+    
+    # Passing the text and language to the TTS engine,
+    
+    myobj = gTTS(text=text, lang=language, slow=False)
+    
+    # Saving the converted audio in a mp3 file
+    
+    myobj.save("pdfpage.mp3")
+    
