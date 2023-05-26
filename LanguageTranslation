@@ -1,0 +1,32 @@
+import PyPDF2
+from PyPDF2 import PdfReader
+from gtts import gTTS
+from deep_translator import GoogleTranslator
+file = open('temp.pdf','rb')
+
+# store data in pdfReader
+pdfReader = PyPDF2.PdfReader(file)
+pgno=input("enter the pageno to convert")
+page = pdfReader.pages[pgno]
+k=page.extract_text()
+n=request.POST.get('n')
+lang=input("enter the language")
+
+from deep_translator import GoogleTranslator
+translation=GoogleTranslator(source='auto', target=lang).translate(k)
+
+# The text that you want to convert to audio
+
+
+# Language in which you want to convert
+language = lang
+
+# Passing the text and language to the engine,
+# here we have marked slow=False. Which tells
+# the module that the converted audio should
+# have a high speed
+myobj = gTTS(text=translation, lang=language, slow=False)
+
+# Saving the converted audio in a mp3 file named
+# welcome
+myobj.save("./static/pdfread.mp3")
