@@ -29,4 +29,4 @@ myobj = gTTS(text=translation, lang=language, slow=False)
 
 # Saving the converted audio in a mp3 file named
 # welcome
-myobj.save("./static/pdfread.mp3")
+myobj.save("pdfread.mp3")
