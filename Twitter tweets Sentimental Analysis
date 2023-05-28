@@ -14,12 +14,12 @@ from textblob import TextBlob
 
 # Create a TextBlob object
 
+# Get your key from developers.twitter.com
 
-
-consumer_key = 'nti2og0OHcN7pJ088WmL3bi5U'
-consumer_secret = '2PxdEHNSZNssvYuUuJBnHnxcXkhDoGk9B1dOTLClk2hHY4C2xa'
-access_token = '3288913716-opCLUYSY3yKgp5VmaaGW51Jha17WCClNxqh6CeB'
-access_token_secret = 's6puBHGKtsI06ujcOh0JrNhEcoznisarCN1Ie2jgDKhMO'
+consumer_key = 'your key'
+consumer_secret = 'your key'
+access_token = 'your key'
+access_token_secret = 'your key'
 # Authenticate with Twitter API
 
 # Search for tweets
