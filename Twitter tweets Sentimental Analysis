@@ -1,0 +1,61 @@
+# pip install tweepy 
+
+# -*- coding: utf-8 -*-
+"""
+Created on Sun May 28 23:49:11 2023
+
+@author: sugandh
+"""
+import tweepy
+from textblob import TextBlob
+
+# Sample text for sentiment analysis
+
+
+# Create a TextBlob object
+
+
+
+consumer_key = 'nti2og0OHcN7pJ088WmL3bi5U'
+consumer_secret = '2PxdEHNSZNssvYuUuJBnHnxcXkhDoGk9B1dOTLClk2hHY4C2xa'
+access_token = '3288913716-opCLUYSY3yKgp5VmaaGW51Jha17WCClNxqh6CeB'
+access_token_secret = 's6puBHGKtsI06ujcOh0JrNhEcoznisarCN1Ie2jgDKhMO'
+# Authenticate with Twitter API
+
+# Search for tweets
+# Authenticate with Twitter API
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
+
+# Search for tweets
+search_query = "Chat GPT "
+tweet_count = 10
+
+
+
+tweets = api.search_tweets(q=search_query, count=tweet_count)
+
+# Print the retrieved tweets
+for tweet in tweets:
+    print(f"User: @{tweet.user.screen_name}")
+    print(f"Text: {tweet.text}")
+    print("---")
+    blob = TextBlob(tweet.text)
+
+    # Perform sentiment analysis
+    sentiment = blob.sentiment
+
+    # Print the sentiment polarity (-1 to 1, where negative is < 0, positive is > 0)
+    print("Sentiment Polarity:", sentiment.polarity)
+
+    # Print the sentiment subjectivity (0 to 1, where 0 is objective, 1 is subjective)
+    print("Sentiment Subjectivity:", sentiment.subjectivity)
+
+    # Determine sentiment label based on polarity
+    if sentiment.polarity > 0:
+        print("Sentiment: Positive")
+    elif sentiment.polarity < 0:
+        print("Sentiment: Negative")
+    else:
+        print("Sentiment: Neutral")
