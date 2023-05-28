@@ -30,7 +30,7 @@ api = tweepy.API(auth)
 
 # Search for tweets
 search_query = "Chat GPT "
-tweet_count = 10
+tweet_count = 100
 
 
 
