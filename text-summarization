@@ -1,0 +1,61 @@
+To summarize a paragraph in Python, you can use various techniques, including extractive summarization or pre-trained models. Here's an example using the extractive summarization approach:
+from nltk.tokenize import sent_tokenize
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+def summarize_paragraph(paragraph, num_sentences=3):
+    # Tokenize the paragraph into sentences
+    sentences = sent_tokenize(paragraph)
+    
+    # Create a TF-IDF vectorizer
+    vectorizer = TfidfVectorizer()
+    
+    # Calculate the TF-IDF matrix
+    tfidf_matrix = vectorizer.fit_transform(sentences)
+    
+    # Calculate the sentence similarities using cosine similarity
+    similarity_matrix = cosine_similarity(tfidf_matrix, tfidf_matrix)
+    
+    # Create a dictionary to store the sentence scores
+    sentence_scores = {}
+    
+    # Calculate the sentence scores based on similarities
+    for i in range(len(sentences)):
+        score = sum(similarity_matrix[i]) - similarity_matrix[i][i]
+        sentence_scores[i] = score
+    
+    # Sort the sentences based on scores in descending order
+    ranked_sentences = sorted(sentence_scores, key=sentence_scores.get, reverse=True)
+    
+    # Select the top N sentences for the summary
+    summary_sentences = ranked_sentences[:num_sentences]
+    
+    # Sort the selected sentences in their original order
+    summary_sentences.sort()
+    
+    # Create the summary by joining the selected sentences
+    summary = ' '.join([sentences[i] for i in summary_sentences])
+    
+    return summary
+
+'''
+You can use this summarize_paragraph function by passing the paragraph you want to summarize and specifying the number of sentences you want in the summary. Here's an example usage:
+
+'''
+paragraph = "This is a sample paragraph. It contains multiple sentences. The goal is to summarize it. We will use Python for this task."
+
+summary = summarize_paragraph(paragraph, num_sentences=2)
+print(summary)
+
+
+OUTPUT :
+It contains multiple sentences. The goal is to summarize it.
+
+
+In this example, the function uses TF-IDF (Term Frequency-Inverse Document Frequency) to calculate the sentence similarities and selects the top N sentences with the highest scores as the summary. Adjust the num_sentences parameter to control the length of the summary.
+
+
+
+
+
+
